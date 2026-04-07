@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_restful import Api
 from data import session
-from data.models import User
+from data.models import User, create_tables
 
 
 app = Flask(__name__)
@@ -22,4 +22,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    create_tables()
