@@ -22,5 +22,8 @@ class ChatNotExists(DatabaseError):
     pass
 
 
-class ChatAccessForbiden(DatabaseError):
+class ChatAccessForbidden(DatabaseError):
+    pass
+
+class NoBookLoaded(Exception):
     pass

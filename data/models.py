@@ -28,11 +28,10 @@ class Message(Base):
     __tablename__ = 'messages'
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False, unique=True, autoincrement=True)
     chat_id: Mapped[int] = mapped_column(ForeignKey("chats.id"), nullable=False)
-    sender_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    sender_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
     content: Mapped[str] = mapped_column(String(500), nullable=False)
     timestamp: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
-    chat: Mapped["Chat"] = relationship("Chat")
-    sender: Mapped["User"] = relationship("User")
+    sender: Mapped[str] = mapped_column(String(120), nullable=False)
 
 def create_tables():
     Base.metadata.create_all(engine)
