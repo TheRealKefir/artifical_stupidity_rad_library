@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import DataRequired
+from data.database_function import *
 
 
 class LoginForm(FlaskForm):
@@ -15,3 +16,10 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     conf_password = PasswordField('Повторите пароль', validators=[DataRequired()])
     submit = SubmitField('Зарегистрироваться')
+
+
+class AccountSettings(FlaskForm):
+    username = StringField('Введите имя')
+    email = EmailField('Введите почту')
+    password = PasswordField('Введите пароль')
+    submit = SubmitField('Сохранить')

@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'JetBrains Mono', monospace;
+  color: #ccc
 }
 
 body {
@@ -71,6 +72,7 @@ body {
   color: #ccc;
   cursor: pointer;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -80,4 +82,165 @@ body {
 .login-btn {
     color: #ccc;
     text-decoration: none;
+}
+
+
+.settings-box {
+  width: 700px;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 160px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.settings-label {
+  color: #aaa;
+  font-size: 14px;
+  text-align: left;
+}
+
+.settings-content {
+  color: #ddd;
+  font-size: 18px;
+  text-align: left;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settings-content input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #777;
+  padding: 8px 0;
+  color: #fff;
+  outline: none;
+}
+
+.avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #555;
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+
+.landing {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.logo {
+  color: #cdcdcd;
+  font-size: 18px;
+}
+
+.nav a {
+  color: #aaa;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  color: #aaa;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 100px;
+}
+
+.feature-card {
+  background: #2a2a2a;
+  padding: 25px;
+  border-radius: 15px;
+  width: 220px;
+  text-align: left;
+}
+
+.feature-card h3 {
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+
+.tech {
+  text-align: center;
+}
+
+.tech h2 {
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.tech-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.tech-list span {
+  background: #2a2a2a;
+  padding: 8px 15px;
+  border-radius: 10px;
+  color: #aaa;
+  font-size: 13px;
 }
