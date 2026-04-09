@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Вход</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
@@ -23,7 +23,7 @@
 
         <div class="buttons">
           <button type="submit" class="btn">Войти</button>  <!-- type="submit" -->
-          <a href="register.html" class="login-btn"><button type="button" class="btn">Зарегистрироваться</button></a>
+          <a href="{{ url_for('register') }}"><button type="button" class="btn">Зарегистрироваться</button></a>
         </div>
       </form>
     </div>

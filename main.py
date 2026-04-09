@@ -27,7 +27,7 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return f'Привет, {current_user.username}!'
-    return send_from_directory('static', 'index.html')
+    return render_template('index.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -121,6 +121,17 @@ def logout():
     logout_user()
     flash('Вы успешно вышли из системы', 'info')
     return redirect(url_for('index'))
+
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html')
+
+@app.route('/chat')
+@login_required
+def chat():
+    return render_template('chat.html')
 
 
 if __name__ == '__main__':
