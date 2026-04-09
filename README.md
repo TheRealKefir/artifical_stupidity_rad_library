@@ -18,7 +18,7 @@
 ## 🛠️ Технологии
 
 * **Backend:** Flask
-* **Frontend:** Vanilla JS (native)
+* **Frontend:** htmx
 * **AI:** HuggingFace модели
 * **Database:** SQLite
 * **UI:** HTML / CSS
@@ -28,10 +28,10 @@
 ## 📦 Установка
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-pip install -r requirements.txt
-python app.py
+git clone https://github.com/TheRealKefir/artifical_stupidity_rad_library
+cd artifical_stupidity_rad_library
+uv sync
+python main.py
 ```
 
 ---
@@ -50,13 +50,15 @@ python app.py
 ## 📁 Структура проекта
 
 ```
-/app
-  /static
-  /templates
-  /models
-  /database
-app.py
-requirements.txt
+
+/static
+/templates
+/alembic
+/data
+/db
+/ai
+main.py
+uv.lock
 README.md
 ```
 

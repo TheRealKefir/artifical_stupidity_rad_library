@@ -17,21 +17,24 @@ class User(Base):
 
 class Chat(Base):
     __tablename__ = 'chats'
-    id: Mapped[int] = mapped_column(primary_key=True, nullable=False, unique=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     chat_name: Mapped[str] = mapped_column(String(120), nullable=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     last_activity: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
 
-    user: Mapped["User"] = relationship("User")
+    user: Mapped["User"] = relationship("User", cascade="all, delete-orphan")
 
 class Message(Base):
     __tablename__ = 'messages'
-    id: Mapped[int] = mapped_column(primary_key=True, nullable=False, unique=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     chat_id: Mapped[int] = mapped_column(ForeignKey("chats.id"), nullable=False)
-    sender_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     content: Mapped[str] = mapped_column(String(500), nullable=False)
     timestamp: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
-    sender: Mapped[str] = mapped_column(String(120), nullable=False)
+    role: Mapped[str] = mapped_column(String(120), nullable=False)
+
+    chat: Mapped["Chat"] = relationship("Chat", cascade="all, delete-orphan")
+    user: Mapped["User"] = relationship("User", cascade="all, delete-orphan")
 
 def create_tables():
     Base.metadata.create_all(engine)
