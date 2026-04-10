@@ -20,9 +20,8 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 import sys
 
-sys.path.insert(0, '..')
-from data.session import Base
-import data.models
+sys.path.insert(0, '../..')
+from old.data.session import Base
 
 target_metadata = Base.metadata
 

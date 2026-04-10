@@ -7,7 +7,7 @@ from .session import Base, engine
 class User(Base):
     __tablename__ = 'users'
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False, unique=True, autoincrement=True)
-    username: Mapped[str] = mapped_column(String(120), nullable=False, unique=True)
+    username: Mapped[str] = mapped_column(String(120), nullable=False, unique=False)
     email: Mapped[str] = mapped_column(String(120), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(120), nullable=False)
     user_db: Mapped[str] = mapped_column(String(120), nullable=True)
@@ -21,7 +21,6 @@ class Chat(Base):
     chat_name: Mapped[str] = mapped_column(String(120), nullable=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     last_activity: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
-
     user: Mapped["User"] = relationship("User", cascade="all, delete-orphan")
 
 class Message(Base):

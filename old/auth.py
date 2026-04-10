@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_user
 import bcrypt
-from data import session
-from data.models import User
+from old.data import session
+from old.data.models import User
 
 # Создаём Blueprint
 api_bp = Blueprint('api', __name__, url_prefix='/api')

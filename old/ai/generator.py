@@ -2,7 +2,7 @@ import re
 from typing import Optional
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
-from data.exceptions import NoBookLoaded
+from old.data.exceptions import NoBookLoaded
 from .chunker import get_user_db, ingest_book
 from normalize import build_prompt
 import tempfile
