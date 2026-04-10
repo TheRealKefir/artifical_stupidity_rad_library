@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="chat-layout">
+
+    <div class="sidebar">
+
+        <input class="search" placeholder="Поиск">
+
+        <div class="chat-list">
+            <div class="chat-item active">Выбранный чат</div>
+            <div class="chat-item">Обычный чат</div>
+        </div>
+
+        <div class="sidebar-buttons">
+            <button class="btn">Add book</button>
+            <button class="btn">New chat</button>
+        </div>
+
+        <div class="account">
+            <div class="avatar-small">You</div>
+            <a href="{{ url_for('account') }}"><button class="btn">Настроить аккаунт</button></a>
+        </div>
+
+    </div>
+
+    <div class="chat-area">
+
+        <h2 class="chat-title">Название чата</h2>
+
+        <div class="messages">
+
+            <div class="message user">
+                <div class="bubble">user prompt</div>
+                <div class="tag">You</div>
+            </div>
+
+            <div class="message bot">
+                <div class="bubble">gpt answer</div>
+            </div>
+
+            <div class="message user">
+                <div class="bubble">user prompt</div>
+                <div class="tag">You</div>
+            </div>
+
+            <div class="message bot">
+                <div class="bubble">gpt answer</div>
+            </div>
+
+            <div class="message user">
+                <div class="bubble">user prompt</div>
+                <div class="tag">You</div>
+            </div>
+
+            <div class="message bot">
+                <div class="bubble">gpt answer</div>
+            </div>
+
+            <div class="message user">
+                <div class="bubble">user prompt</div>
+                <div class="tag">You</div>
+            </div>
+
+            <div class="message bot">
+                <div class="bubble">gpt answer</div>
+            </div>
+
+            <div class="message user">
+                <div class="bubble">user prompt</div>
+                <div class="tag">You</div>
+            </div>
+
+        </div>
+
+        <div class="input-area">
+            <input placeholder="Поле ввода">
+            <button class="send">⬆</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

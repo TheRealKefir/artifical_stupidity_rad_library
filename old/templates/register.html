@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Регистрация</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -33,7 +33,7 @@
       </div>
 
       <div class="buttons">
-        <a href="login.html" class="login-btn"><button class="btn">Войти</button></a>
+        <a href="{{ url_for('login') }}" class="login-btn"><button class="btn">Войти</button></a>
         <button class="btn">Зарегистрироваться</button>
       </div>
     </div>

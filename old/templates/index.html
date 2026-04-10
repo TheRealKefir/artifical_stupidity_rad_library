@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RAD-library</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,8 +13,8 @@
     <div class="header">
         <div class="logo">RAD-library</div>
         <div class="nav">
-            <a href="login.html"><button class="btn">Войти</button></a>
-            <a href="register.html"><button class="btn">Зарегистрироваться</button></a>
+            <a href="{{ url_for('login') }}"><button class="btn">Войти</button></a>
+            <a href="{{ url_for('register') }}"><button class="btn">Зарегистрироваться</button></a>
         </div>
     </div>
 
@@ -25,8 +25,8 @@
         </p>
 
         <div class="hero-buttons">
-            <a href="login.html"><button class="btn">Войти</button></a>
-            <a href="register.html"><button class="btn">Зарегистрироваться</button></a>
+            <a href="{{ url_for('login') }}"><button class="btn">Войти</button></a>
+            <a href="{{ url_for('register') }}"><button class="btn">Зарегистрироваться</button></a>
         </div>
     </div>
 
