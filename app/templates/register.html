@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box">
+        <h1>Регистрация</h1>
+
+        <div class="input-group">
+            <label>Имя пользователя</label>
+            <input type="text">
+        </div>
+
+        <div class="input-group">
+            <label>Почта</label>
+            <input type="text">
+        </div>
+
+        <div class="input-group">
+            <label>Пароль</label>
+            <input type="password">
+        </div>
+
+        <div class="input-group">
+            <label>Повторите пароль</label>
+            <input type="password">
+        </div>
+
+        <div class="buttons">
+            <a href="{{ login }}" class="login-btn">
+                <button class="btn">Войти</button>
+            </a>
+            <button class="btn">Зарегистрироваться</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

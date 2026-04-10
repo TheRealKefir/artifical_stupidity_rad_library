@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Чат</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block content %}
 <div class="chat-layout">
 
     <div class="sidebar">
@@ -26,7 +19,9 @@
 
         <div class="account">
             <div class="avatar-small">You</div>
-            <a href="{{ url_for('account') }}"><button class="btn">Настроить аккаунт</button></a>
+            <a href="{{ account }}">
+                <button class="btn">Настроить аккаунт</button>
+            </a>
         </div>
 
     </div>
@@ -88,6 +83,4 @@
     </div>
 
 </div>
-
-</body>
-</html>
+{% endblock %}

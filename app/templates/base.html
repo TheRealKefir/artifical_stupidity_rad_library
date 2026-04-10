@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-settings.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>RAD-library</title>
+</head>
+<body>
+<!-- Begin page content -->
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

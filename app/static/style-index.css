@@ -1,0 +1,100 @@
+.landing {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.logo {
+  color: #cdcdcd;
+  font-size: 18px;
+}
+
+.nav a {
+  color: #aaa;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  color: #aaa;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 100px;
+}
+
+.feature-card {
+  background: #2a2a2a;
+  padding: 25px;
+  border-radius: 15px;
+  width: 220px;
+  text-align: left;
+}
+
+.feature-card h3 {
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.tech {
+  text-align: center;
+}
+
+.tech h2 {
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.tech-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.tech-list span {
+  background: #2a2a2a;
+  padding: 8px 15px;
+  border-radius: 10px;
+  color: #aaa;
+  font-size: 13px;
+}

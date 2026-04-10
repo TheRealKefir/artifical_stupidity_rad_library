@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>RAD-library</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block content %}
 <div class="landing">
 
     <div class="header">
         <div class="logo">RAD-library</div>
         <div class="nav">
-            <a href="{{ url_for('login') }}"><button class="btn">Войти</button></a>
-            <a href="{{ url_for('register') }}"><button class="btn">Зарегистрироваться</button></a>
+            <a href="{{ login }}">
+                <button class="btn">Войти</button>
+            </a>
+            <a href="{{ register }}">
+                <button class="btn">Зарегистрироваться</button>
+            </a>
         </div>
     </div>
 
@@ -25,8 +22,12 @@
         </p>
 
         <div class="hero-buttons">
-            <a href="{{ url_for('login') }}"><button class="btn">Войти</button></a>
-            <a href="{{ url_for('register') }}"><button class="btn">Зарегистрироваться</button></a>
+            <a href="{{ login }}">
+                <button class="btn">Войти</button>
+            </a>
+            <a href="{{ register }}">
+                <button class="btn">Зарегистрироваться</button>
+            </a>
         </div>
     </div>
 
@@ -60,6 +61,4 @@
     </div>
 
 </div>
-
-</body>
-</html>
+{% endblock %}
