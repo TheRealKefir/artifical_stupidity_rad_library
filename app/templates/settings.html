@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Настройки</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block content %}
 <div class="container">
     <div class="login-box settings-box">
         <h1>Настройки</h1>
@@ -38,11 +31,11 @@
 
         <div class="buttons">
             <button class="btn">Сохранить</button>
-            <a href="{{ url_for('chat') }}"><button class="btn">Вернуться</button></a>
+            <a href="{{ chat }}">
+                <button class="btn">Вернуться</button>
+            </a>
         </div>
 
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

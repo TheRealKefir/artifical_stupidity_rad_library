@@ -4,7 +4,7 @@ from flask_restful import Api
 import bcrypt
 from old.data import session
 from old.data.models import User, create_tables
-from api.auth import api_bp
+from old.api.auth import api_bp
 
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return f'Привет, {current_user.username}!'
-    return send_from_directory('static', 'index.html')
+    return send_from_directory('../app/static', 'index.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])

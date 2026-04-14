@@ -17,7 +17,7 @@ class Config:
 
     VECTOR_STORE_PATH = os.path.join(BASE_DIR, 'instance', 'vector_db')
 
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app', 'static', 'uploads')
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app', 'app/static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 
