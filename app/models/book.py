@@ -1,4 +1,3 @@
-import datetime
 from sqlalchemy import String, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
 from app.extensions import db
@@ -12,4 +11,4 @@ class Book(db.Model):
     filename: Mapped[str] = db.Column(db.String(255), nullable=False)
     author: Mapped[str] = db.Column(db.String(255), nullable=False)
     status: Mapped[str] = db.Column(db.String(255), nullable=False)
-    embedding_model = db.Column(db.String(128), default="all-MiniLM-L6-v2")
+    embedding_model = db.Column(db.String(128))

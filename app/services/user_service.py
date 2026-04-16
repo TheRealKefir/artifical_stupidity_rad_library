@@ -33,3 +33,10 @@ class UserService:
         db.refresh(user)
         logger.info(f'User with email {new_password} updated')
         return user
+
+    @staticmethod
+    def delete_user(user_id: int):
+        user = db.session.query(User).filter(User.id == user_id).first()
+        db.session.delete(user)
+        db.commit()
+        logger.info(f'User with email {user.email} deleted')

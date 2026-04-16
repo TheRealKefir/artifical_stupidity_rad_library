@@ -33,7 +33,7 @@ var/
 
 # Logs
 
-*.log
+/logs
 
 # Unit test / coverage reports
 
