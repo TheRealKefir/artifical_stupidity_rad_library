@@ -1,0 +1,7 @@
+<div class="message {{ msg.role }}">
+  <div class="bubble">{{ msg.text }}</div>
+
+  {% if msg.role == "user" %}
+    <div class="tag">You</div>
+  {% endif %}
+</div>
