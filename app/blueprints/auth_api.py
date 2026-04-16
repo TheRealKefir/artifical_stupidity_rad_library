@@ -27,14 +27,6 @@ def register():
         user = AuthService.register_user(username, email, password)
 
 
-        return jsonify({
-            'message': 'User registered good',
-            'user': {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email
-            }
-        }), 201
 
     except ValueError as e:
         logger.error(f"Ошибка регистрации: {str(e)}")
