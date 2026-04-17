@@ -40,3 +40,12 @@ class UserService:
         db.session.delete(user)
         db.commit()
         logger.info(f'User with email {user.email} deleted')
+
+    @staticmethod
+    def get_user_by_id(user_id: int):
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user:
+            raise ValueError("Пользователь не найден")
+        return user
+

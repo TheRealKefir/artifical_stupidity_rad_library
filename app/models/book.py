@@ -5,10 +5,10 @@ from app.extensions import db
 
 class Book(db.Model):
     __tablename__ = 'book'
-    book_id: Mapped[int] = db.Column(primary_key=True, autoincrement=True, nullable=False)
-    user_id: Mapped[int] = db.Column(ForeignKey('user.id'), nullable=False)
-    title: Mapped[str] = db.Column(db.String(255), nullable=False)
-    filename: Mapped[str] = db.Column(db.String(255), nullable=False)
-    author: Mapped[str] = db.Column(db.String(255), nullable=False)
-    status: Mapped[str] = db.Column(db.String(255), nullable=False)
-    embedding_model = db.Column(db.String(128))
+    book_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)  # user_id, не users_id
+    # title: Mapped[str] = mapped_column(String(255), nullable=False)
+    # filename: Mapped[str] = mapped_column(String(255), nullable=False)
+    # author: Mapped[str] = mapped_column(String(255), nullable=False)
+    # status: Mapped[str] = mapped_column(String(255), nullable=False)
+    # embedding_model = db.Column(db.String(128))

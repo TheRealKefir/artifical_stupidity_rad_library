@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     email: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(128), nullable=False)
 
-    books = db.relationship('Book', backref='owner', lazy='dynamic', cascade='all, delete-orphan')
-    chats = db.relationship('Chat', backref='owner', lazy='dynamic', cascade='all, delete-orphan')
+    #books = db.relationship('Book', backref='owner', lazy='dynamic', cascade='all, delete-orphan')
+    #chats = db.relationship('Chat', backref='owner', lazy='dynamic', cascade='all, delete-orphan')
 
     def verify_password(self, password: str):
         return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))

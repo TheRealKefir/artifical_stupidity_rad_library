@@ -11,7 +11,7 @@ class Chat(db.Model):
     chat_name: Mapped[str] = mapped_column(String(120), nullable=True, default="Новый чат")
     last_activity: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
 
-    messages = db.relationship("Message", back_populates="chat", cascade="all, delete-orphan", lazy="dynamic")
+    #messages = db.relationship("Message", back_populates="chat", cascade="all, delete-orphan", lazy="dynamic")
 
 
 class Message(db.Model):
