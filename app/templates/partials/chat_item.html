@@ -1,0 +1,10 @@
+<div class="chat-item {% if active %}active{% endif %}"
+     hx-get="/chat/{{ chat.id }}"
+     hx-target="#chat-window"
+     hx-swap="innerHTML">
+
+    <span class="chat-title">
+        {{ chat.title or "Новый чат" }}
+    </span>
+
+</div>
