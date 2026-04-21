@@ -4,6 +4,7 @@ from app.services.chat_service import ChatService
 
 chat_bp = Blueprint('chat', __name__, url_prefix='/api/chat')
 
+
 @chat_bp.route("/chat")
 @login_required
 def chat():
@@ -22,7 +23,8 @@ def chat_list():
 @login_required
 def create_chat():
     new_chat = ChatService.create_chat(current_user.id)
-    return render_template("partials/chat_item.html", chat=new_chat)
+    return render_template(
+        "partials/chat_item.html", chat=new_chat, active=True)
 
 
 @chat_bp.route("/chat/<int:chat_id>/delete", methods=["POST"])
@@ -36,4 +38,4 @@ def delete_chat(chat_id):
 @login_required
 def open_chat(chat_id):
     messages = ChatService.get_chat_messages(chat_id)
-    return render_template("partials/messages.html", messages=messages)
+    return render_template("partials/messages.html", messages=messages, chat_id=chat_id)
