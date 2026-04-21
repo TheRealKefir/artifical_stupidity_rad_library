@@ -9,7 +9,8 @@ chat_bp = Blueprint('chat', __name__, url_prefix='/api/chat')
 @login_required
 def chat():
     chats = ChatService.get_user_chats(current_user.id)
-    return render_template("chat.html", chats=chats)
+    last_chat_id = chats[-1].id if chats else None
+    return render_template("chat.html", chats=chats, last_chat_id=last_chat_id)
 
 
 @chat_bp.route("/chat/list")
@@ -38,4 +39,4 @@ def delete_chat(chat_id):
 @login_required
 def open_chat(chat_id):
     messages = ChatService.get_chat_messages(chat_id)
-    return render_template("partials/messages.html", messages=messages, chat_id=chat_id)
+    return render_template("partials/messages.html", messages=messages)

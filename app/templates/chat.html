@@ -25,11 +25,12 @@
         </div>
 
         <div class="chat-area">
-            <h2 class="chat-title">Название чата</h2>
-            <div id="messages"
-                 class="messages"
-                 hx-get="/messages/{{ chat_id }}"
-                 hx-trigger="load">
+            <h2 class="chat-title">{% chats[last_chat_id].chat_name %}</h2>
+            <div id="chat-window"
+                 {% if last_chat_id %}
+                 hx-get="/chat/{{ last_chat_id }}"
+                 hx-trigger="load"
+                 {% endif %}>
             </div>
             <form class="input-area"
                   hx-post="/send/{{ chat_id }}"
