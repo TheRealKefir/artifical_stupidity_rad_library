@@ -5,8 +5,7 @@
     <div class="sidebar">
         <input class="search" placeholder="Поиск">
         <div class="chat-list">
-            <div class="chat-item active">Выбранный чат</div>
-            <div class="chat-item">Обычный чат</div>
+            <div hx-get="/chat/list" hx-trigger="load">
         </div>
         <div class="sidebar-buttons">
             <button class="btn">Add book</button>
