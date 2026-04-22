@@ -40,3 +40,8 @@ class UserService:
         db.session.delete(user)
         db.commit()
         logger.info(f'User with email {user.email} deleted')
+
+    @staticmethod
+    def get_user_by_id(user_id: int):
+        user = db.session.query(User).filter(User.id == user_id).first()
+        return user

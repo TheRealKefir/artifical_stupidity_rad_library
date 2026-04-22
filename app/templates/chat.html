@@ -5,40 +5,50 @@
     <div class="sidebar">
         <input class="search" placeholder="Поиск">
         <div class="chat-list">
-            <div hx-get="/chat/list" hx-trigger="load">
-            </div>
-            <div class="sidebar-buttons">
-                <button class="btn">Добавить книгу</button>
-                <button class="btn"
-                        hx-post="/chat/create"
-                        hx-target="#chat-list"
-                        hx-swap="beforeend">
-                    Новый чат
-                </button>
-            </div>
-            <div class="account">
-                <div class="avatar-small">You</div>
-                <a href="{{ /account }}">
-                    <button class="btn">Настроить аккаунт</button>
-                </a>
-            </div>
+            <div hx-get="/chat/list" hx-trigger="load"></div>
+
+
+        </div>
+        <div class="sidebar-buttons">
+            <button class="btn">Добавить книгу</button>
+            <button class="btn"
+                    hx-post="/chat/create"
+                    hx-target="#chat-list"
+                    hx-swap="beforeend">
+                Новый чат
+            </button>
         </div>
 
-        <div class="chat-area">
-            <h2 class="chat-title">{% chats[last_chat_id].chat_name %}</h2>
-            <div id="chat-window"
-                 {% if last_chat_id %}
-                 hx-get="/chat/{{ last_chat_id }}"
-                 hx-trigger="load"
-                 {% endif %}>
-            </div>
-            <form class="input-area"
-                  hx-post="/send/{{ chat_id }}"
-                  hx-target="#messages"
-                  hx-swap="beforeend">
-                <input name="text" placeholder="Поле ввода" autocomplete="off">
-                <button class="send">⬆</button>
-            </form>
+        <div class="account">
+            <div class="avatar-small">You</div>
+            <a href="/account">
+                <button class="btn">Настроить аккаунт</button>
+            </a>
         </div>
     </div>
-    {% endblock %}
+    <div class="chat-area">
+        <h2 class="chat-title">
+            {% if last_chat_id is not none and chats %}
+            {{ chats[last_chat_id].chat_name }}
+            {% else %}
+            Выберите чат или создайте новый
+            {% endif %}
+        </h2>
+
+        <div id="chat-window"
+             {% if last_chat_id %}
+             hx-get="/chat/{{ last_chat_id }}"
+             hx-trigger="load"
+             {% endif %}>
+        </div>
+
+        <form class="input-area"
+              hx-post="/send/{{ chat_id }}"
+              hx-target="#messages"
+              hx-swap="beforeend">
+            <input name="text" placeholder="Поле ввода" autocomplete="off">
+            <button class="send">⬆</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

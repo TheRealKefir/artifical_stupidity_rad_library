@@ -6,19 +6,21 @@
         <h1>Вход</h1>
 
         <form method="POST">
+            {{ form.hidden_tag() }}
+
             <div class="input-group">
                 <label>Имя пользователя</label>
-                <input type="text" name="username">
+                {{ form.username() }}
             </div>
 
             <div class="input-group">
                 <label>Пароль</label>
-                <input type="password" name="password">
+                {{ form.password() }}
             </div>
 
             <div class="buttons">
                 <button type="submit" class="btn">Войти</button>
-                <a href="{{ /register }}">
+                <a href="{{ url_for('auth.register') }}">
                     <button type="button" class="btn">Зарегистрироваться</button>
                 </a>
             </div>
@@ -26,4 +28,3 @@
     </div>
 </div>
 {% endblock %}
-

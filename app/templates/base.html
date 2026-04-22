@@ -16,6 +16,26 @@
 <!-- Begin page content -->
 <main role="main" class="container">
     {% block content %}{% endblock %}
+    {% if error %}
+    <div id="error-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Ошибка</span>
+                <button class="close-button" onclick="document.getElementById('error-modal').style.display='none'">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ error }}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm" onclick="document.getElementById('error-modal').style.display='none'">
+                    Понятно
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </main>
 </body>
 </html>

@@ -69,3 +69,78 @@ html, body {
 .btn:hover {
   background: #4a4a4a;
 }
+
+/* Подложка (на весь экран) */
+.modal-overlay {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Затемнение */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Само окно */
+.modal-content {
+    background-color: #1e1e1e; /* В стиле JetBrains/Dark */
+    border: 1px solid #ff4444;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: white;
+}
+
+.modal-body {
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-confirm {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.btn-confirm:hover {
+    background-color: #cc3333;
+}

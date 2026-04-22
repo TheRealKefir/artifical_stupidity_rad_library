@@ -1,4 +1,4 @@
-from app.models import User, Chat, Message, Book
+from app.models import User, Chat, Message
 from app.extensions import db
 import logging
 

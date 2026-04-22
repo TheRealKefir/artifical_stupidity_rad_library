@@ -17,7 +17,10 @@ class Chat(db.Model):
 class Message(db.Model):
     __tablename__ = 'messages'
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    chat_id: Mapped[int] = mapped_column(ForeignKey("chats.id"), nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     role: Mapped[str] = mapped_column(String(20))
     content: Mapped[str] = mapped_column(Text, nullable=False)
     timestamp: Mapped[datetime.datetime] = mapped_column(nullable=False, default=datetime.datetime.now)
+
+    chat = db.relationship("Chat", back_populates="messages")

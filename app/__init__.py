@@ -14,20 +14,21 @@ def create_app(config_class=Config):
 
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-    # раскоментить когда появятся блюпринты
-    # from app.blueprints.auth import auth_bp
-    # from app.blueprints.library import library_bp
-    # from app.blueprints.chat import chat_bp
 
-    # app.register_blueprint(auth_bp, url_prefix='/auth')
-    # app.register_blueprint(library_bp, url_prefix='/library')
-    # app.register_blueprint(chat_bp, url_prefix='/chat')
+    from app.blueprints.root_routes import root_bp
+    from app.blueprints.auth_routes import auth_bp
+    from app.blueprints.chat_routes import chat_bp
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(chat_bp)
+    app.register_blueprint(root_bp)
 
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
+    with app.app_context():
+        db.create_all()
     app.logger.info("Приложение Flask успешно запущено")
 
     return app
