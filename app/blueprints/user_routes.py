@@ -1,46 +1,44 @@
-from flask import Blueprint, request, render_template, redirect
-from app.services.user_service import UserService
-from app.utils.decorators import check_ownership
+from flask import Blueprint, render_template, redirect
 from flask_login import login_required, logout_user, current_user
-import logging
-
-logger = logging.getLogger(__name__)
+from app.utils.helpers import get_password_hash
+from app.forms.account_form import AccountSettings
+from app.services.user_service import UserService
 
 user_bp = Blueprint('user', __name__)
 
 
-@user_bp.route('/<int:user_id>', methods=['GET'])
-@check_ownership
-def get_user():
-    return UserService.get_user_by_id(current_user.id)
-
-
-@check_ownership
-@user_bp.route("/settings")
+@user_bp.route("/settings", methods=["GET"])
 @login_required
 def settings():
+    form = AccountSettings()
     user = UserService.get_user_by_id(current_user.id)
-    return render_template("settings.html", user=user)
+    return render_template("settings.html", user=user, form=form)
 
 
-@check_ownership
-@user_bp.route("/settings/update", methods=["POST"])
+@user_bp.route("/settings", methods=["POST"])
 @login_required
 def settings_update():
-    new_username = request.form.get("username")
-    new_email = request.form.get("email")
-    new_password = request.form.get("password")
+    form = AccountSettings()
+    user = UserService.get_user_by_id(current_user.id)
 
-    UserService.update_username(current_user.id, new_username)
-    UserService.update_email(current_user.id, new_email)
-    UserService.update_password(current_user.id, new_password)
+    if form.validate_on_submit():
+        new_username = form.username.data
+        new_password = form.password.data
+        new_email = form.email.data
+
+        if new_username and new_username != user.username:
+            UserService.update_username(current_user.id, new_username)
+        if new_email and new_email != user.email:
+            UserService.update_email(current_user.id, new_email)
+        if new_password and get_password_hash(new_password) != user.password:
+            UserService.update_password(current_user.id, new_password)
 
     user = UserService.get_user_by_id(current_user.id)
-    return render_template("account.html", user=user)
+    return render_template("settings.html", form=form, user=user)
 
 
-@check_ownership
-@user_bp.route("/settings/delete", methods=["POST"])
+
+@user_bp.route("/settings", methods=["DELETE"])
 @login_required
 def delete_account():
     UserService.delete_user(current_user.id)
