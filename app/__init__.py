@@ -18,10 +18,12 @@ def create_app(config_class=Config):
     from app.blueprints.root_routes import root_bp
     from app.blueprints.auth_routes import auth_bp
     from app.blueprints.chat_routes import chat_bp
+    from app.blueprints.user_routes import user_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(root_bp)
+    app.register_blueprint(user_bp)
 
     try:
         os.makedirs(app.instance_path)
