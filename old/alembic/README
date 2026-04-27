@@ -1,5 +1,0 @@
-Generic single-database configuration.(artifical_stupidity_rad_library) (base) [kefir@abyss artifical_stupidity_rad_library]$ alembic revision --autogenerate -m "more fixes"
-INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-ERROR [alembic.util.messaging] Target database is not up to date.
-  FAILED: Target database is not up to date.

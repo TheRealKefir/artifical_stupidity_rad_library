@@ -11,7 +11,7 @@ class Config:
     CELERY_BROKER_URL = 'redis://localhost:6379/0'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
-    HUGGING_FASE_API_KEY = 'пока нету'
+    HUGGING_FACE_API_KEY = 'пока нету'
     HF_EMBEDDING_MODEL = "intfloat/multilingual-e5-large"
     HF_LLM_MODEL = "HuggingFaceH4/zephyr-7b-beta"
 
