@@ -1,10 +1,7 @@
-from flask import Blueprint, render_template, redirect, current_app
+from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 from app.services.chat_service import ChatService
 from app.utils.decorators import check_ownership
-from app.forms.book_form import BookForm
-import os
-from app.tasks import process_book_task
 
 chat_bp = Blueprint('chat', __name__)
 
@@ -37,7 +34,7 @@ def create_chat():
 @login_required
 def delete_chat(chat_id):
     ChatService.delete_chat(chat_id)
-    return redirect('/chat')
+    return "", 204
 
 
 @check_ownership
@@ -46,19 +43,3 @@ def delete_chat(chat_id):
 def open_chat(chat_id):
     messages = ChatService.get_chat_messages(chat_id)
     return render_template("partials/messages.html", messages=messages)
-
-
-@chat_bp.route('/upload', methods='POST')
-@login_required
-def upload_book():
-    form = BookForm()
-    if form.validate_on_submit():
-        file = form.book.data
-        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
-        os.makedirs(current_app.config, exist_ok=True)
-        file.save(file_path)
-
-        process_book_task.delay(
-            file_path=file_path,
-            user_id=current_user.id,
-        )

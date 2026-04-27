@@ -1,3 +1,7 @@
-{% for msg in messages %}
-  {% include "partials/message.html" %}
-{% endfor %}
+<div id="messages">
+    {% for msg in messages %}
+        <div class="message">
+            {{ msg.text }}
+        </div>
+    {% endfor %}
+</div>
