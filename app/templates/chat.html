@@ -27,28 +27,42 @@
         </div>
     </div>
     <div class="chat-area">
+
         <h2 class="chat-title">
-            {% if last_chat_id is not none and chats %}
-            {{ chats[last_chat_id].chat_name }}
+            {% if chat_id %}
+            Чат #{{ chat_id }}
             {% else %}
             Выберите чат или создайте новый
             {% endif %}
         </h2>
 
         <div id="chat-window"
-             {% if last_chat_id %}
-             hx-get="/chat/{{ last_chat_id }}"
+             {% if chat_id %}
+             hx-get="{{ url_for('chat.get_messages', chat_id=chat_id) }}"
              hx-trigger="load"
-             {% endif %}>
+             hx-swap="innerHTML">
+            {% endif %}>
         </div>
 
+        {% if chat_id %}
         <form class="input-area"
               hx-post="/send/{{ chat_id }}"
               hx-target="#messages"
               hx-swap="beforeend">
-            <input name="text" placeholder="Поле ввода" autocomplete="off">
-            <button class="send">⬆</button>
+
+            <input name="text"
+                   placeholder="Поле ввода"
+                   autocomplete="off">
+
+            <button class="send" type="submit">⬆</button>
         </form>
+        {% else %}
+        <div class="input-area">
+            <input placeholder="Сначала выберите чат" disabled>
+            <button class="send" disabled>⬆</button>
+        </div>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

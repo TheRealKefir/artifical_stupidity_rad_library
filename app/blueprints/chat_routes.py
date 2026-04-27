@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 from app.services.chat_service import ChatService
 from app.utils.decorators import check_ownership
+from app.models import Chat
 
 chat_bp = Blueprint('chat', __name__)
 
@@ -29,7 +30,7 @@ def create_chat():
         "partials/chat_item.html", chat=new_chat, active=True)
 
 
-@check_ownership
+@check_ownership(Chat)
 @chat_bp.route("/chat/<int:chat_id>/delete", methods=["POST"])
 @login_required
 def delete_chat(chat_id):
@@ -37,9 +38,16 @@ def delete_chat(chat_id):
     return "", 204
 
 
-@check_ownership
 @chat_bp.route("/chat/<int:chat_id>")
 @login_required
-def open_chat(chat_id):
+@check_ownership(Chat)
+def chat_page(chat_id):
+    return render_template("chat.html", chat_id=chat_id)
+
+
+@chat_bp.route("/chat/<int:chat_id>/messages", endpoint="get_messages")
+@login_required
+@check_ownership(Chat)
+def get_messages(chat_id):
     messages = ChatService.get_chat_messages(chat_id)
     return render_template("partials/messages.html", messages=messages)
