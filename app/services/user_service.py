@@ -12,7 +12,7 @@ class UserService:
         user = db.session.query(User).filter(User.id == user_id).first()
         user.username = new_username
         db.session.commit()
-        db.refresh(user)
+        db.session.refresh(user)
         logger.info(f'User with email {new_username} updated')
         return user
 
@@ -21,7 +21,7 @@ class UserService:
         user = get_user_by_id(user_id)
         user.email = new_email
         db.session.commit()
-        db.refresh(user)
+        db.session.refresh(user)
         logger.info(f'User with email {new_email} updated')
         return user
 
@@ -30,7 +30,7 @@ class UserService:
         user = get_user_by_id(user_id)
         user.password = get_password_hash(new_password)
         db.session.commit()
-        db.refresh(user)
+        db.session.refresh(user)
         logger.info(f'User with email {new_password} updated')
         return user
 
