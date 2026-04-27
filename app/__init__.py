@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from config import Config
-from app.extensions import db, migrate, login_manager
+from app.extensions import db, migrate, login_manager, celery
 from app.utils.logging import setup_logger
 
 
@@ -11,6 +11,7 @@ def create_app(config_class=Config):
     setup_logger(app)
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
+    celery.conf.update(app.config)
 
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
