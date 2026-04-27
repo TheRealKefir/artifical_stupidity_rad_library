@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, redirect
 from flask_login import login_required, current_user
-from torch.distributed.elastic.multiprocessing.redirects import redirect
 
 from app.services.chat_service import ChatService
 from app.utils.decorators import check_ownership
