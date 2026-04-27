@@ -37,7 +37,7 @@ class ChatService:
     def create_chat(user_id):
         chat = Chat(user_id=user_id)
         db.add(chat)
-        db.commit()
+        db.session.commit()
         db.refresh(chat)
         logger.info(f'Chat with chat_id {chat.id} created')
         return chat
