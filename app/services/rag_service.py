@@ -7,6 +7,7 @@ from flask import current_app
 from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_chroma import Chroma
 
 from app.utils.helpers import clear_hardware_cache
 
@@ -197,3 +198,7 @@ class RagService:
 
         logger.info(f"Найдено документов: {len(results)}")
         return results
+
+    @staticmethod
+    def get_vector_db():
+        return Chroma(current_app.config.get('VECTOR_STORE_PATH'))

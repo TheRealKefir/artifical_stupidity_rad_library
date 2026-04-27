@@ -8,11 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class AuthService:
-    """
-    Сервис для управления аутентификацией и пользователями.
-    Инкапсулирует логику работы с БД и хеширования.
-    """
-
     @staticmethod
     def register_user(username, email, password):
         if not username or not email or not password:
