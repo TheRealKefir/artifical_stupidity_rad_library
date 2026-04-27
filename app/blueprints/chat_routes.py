@@ -64,3 +64,9 @@ def upload_book():
             file_path=file_path,
             user_id=current_user.id,
         )
+
+@chat_bp.route('/upload', methods=['GET'])
+@login_required
+def upload_book():
+    form = BookForm()
+    return render_template('upload_book.html', form=form)

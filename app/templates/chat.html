@@ -10,7 +10,13 @@
 
         </div>
         <div class="sidebar-buttons">
-            <button class="btn">Добавить книгу</button>
+            <button class="btn"
+                    hx-get="/upload"
+                    hx-target="body"
+                    hx-swap="beforeend">
+                Добавить книгу
+            </button>
+
             <button class="btn"
                     hx-post="/chat/create"
                     hx-target="#chat-list"
