@@ -39,9 +39,9 @@ class ChatService:
     @staticmethod
     def create_chat(user_id):
         chat = Chat(user_id=user_id)
-        db.add(chat)
-        db.commit()
-        db.refresh(chat)
+        db.session.add(chat)
+        db.session.commit()
+        db.session.refresh(chat)
         logger.info(f'Chat with chat_id {chat.id} created')
         return chat
 

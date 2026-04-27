@@ -10,7 +10,7 @@ chat_bp = Blueprint('chat', __name__)
 @login_required
 def chat():
     chats = ChatService.get_user_chats(current_user.id)
-    last_chat_id = chats[-1].id if chats else None
+    last_chat_id = chats[-1].id - 1 if chats else None
     return render_template("chat.html", chats=chats, last_chat_id=last_chat_id)
 
 
