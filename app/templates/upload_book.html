@@ -1,22 +1,16 @@
-{% extends "base.html" %}
+<div id="modal" class="modal-overlay" onclick="if(event.target == this) this.remove()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <form hx-post="/upload"
+              hx-encoding="multipart/form-data"
+              hx-target="body">
 
-{% block content %}
-<div class="upload-container">
+            {{ form.hidden_tag() }}
 
-    <h2>Загрузка книги</h2>
+            <div class="form-group">
+                {{ form.book(class="file-input") }}
+            </div>
 
-    <form method="POST" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-
-        <div>
-            {{ form.book.label }}
-            {{ form.book() }}
-        </div>
-
-        <button type="submit" class="btn">
-            Загрузить
-        </button>
-    </form>
-
+            <button type="submit" class="btn">Загрузить</button>
+        </form>
+    </div>
 </div>
-{% endblock %}

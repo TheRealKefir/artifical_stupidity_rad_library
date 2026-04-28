@@ -1,4 +1,4 @@
-<a href="{{ url_for('chat.chat_page', chat_id=chat.id) }}">
+<a href="{{ url_for('chat.open_chat', chat_id=chat.id) }}">
     <button
             class="btn"
             hx-get="/chat/{{ chat.id }}"

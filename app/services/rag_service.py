@@ -23,9 +23,9 @@ class RagService:
         """
         logger.info("Инициализация HuggingFaceEndpointEmbeddings")
         return HuggingFaceEndpointEmbeddings(
-            model=current_app.config,
+            model=current_app.config.get("HF_EMBEDDING_MODEL"),
             task="feature-extraction",
-            huggingfacehub_api_token=current_app.config
+            huggingfacehub_api_token=current_app.config.get("HUGGINGFACE_API_KEY"),
         )
 
     @staticmethod
@@ -201,4 +201,9 @@ class RagService:
 
     @staticmethod
     def get_vector_db():
-        return Chroma(current_app.config.get('VECTOR_STORE_PATH'))
+        persist_directory = current_app.config.get('VECTOR_STORE_PATH')
+        return Chroma(
+            persist_directory=persist_directory,
+            collection_name="langchain",
+            embedding_function=RagService.get_embeddings()
+        )

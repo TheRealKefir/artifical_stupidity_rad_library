@@ -8,16 +8,16 @@ class Config:
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'instance', 'app.db')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    CELERY_BROKER_URL = 'redis://localhost:6379/0'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+    broker_url = 'redis://localhost:6379/0'
+    result_backend = 'redis://localhost:6379/0'
 
-    HUGGING_FACE_API_KEY = 'пока нету'
+    HUGGING_FACE_API_KEY = ''
     HF_EMBEDDING_MODEL = "intfloat/multilingual-e5-large"
     HF_LLM_MODEL = "HuggingFaceH4/zephyr-7b-beta"
 
     VECTOR_STORE_PATH = os.path.join(BASE_DIR, 'instance', 'vector_db')
 
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'app', 'app/static', 'uploads')
+    UPLOAD_FOLDER = os.path.join('uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 

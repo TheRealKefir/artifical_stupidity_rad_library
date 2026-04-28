@@ -1,7 +1,5 @@
 <div id="messages">
     {% for msg in messages %}
-        <div class="message">
-            {{ msg.text }}
-        </div>
+        {% include "partials/message.html" %}
     {% endfor %}
 </div>

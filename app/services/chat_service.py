@@ -45,44 +45,29 @@ class ChatService:
         logger.info(f'Chat with chat_id {chat.id} created')
         return chat
 
-    class ChatService:
-        @staticmethod
-        def send_chat_message(chat_id, query):
-            try:
-                chat = db.session.get(Chat, chat_id)
-                if not chat:
-                    return "Ошибка: Чат не найден."
-
-                ChatService.save_message(chat_id, role='user', content=query)
-                vector_db = RagService.get_vector_db()
-                relevant_docs = RagService.vector_search(
-                    query_text=query,
-                    db=vector_db,
-                    user_id=chat.user_id,
-                    k=4
-                )
-
-                chat_history = ChatService.get_chat_history(chat_id, limit=5)
-
-                answer = AIService.generate_answer(
-                    query=query,
-                    context_documents=relevant_docs,
-                    chat_history=chat_history
-                )
-
-                ChatService.save_message(chat_id, role='assistant', content=answer)
-
-                logger.info(f"Сообщение в чате {chat_id} успешно обработано")
-                return answer
-
-            except Exception as e:
-                logger.error(f"Критическая ошибка в send_chat_message: {str(e)}", exc_info=True)
-                return "Произошла техническая ошибка. Попробуйте позже."
+    @staticmethod
+    def save_message(chat_id, user_id, role, content):
+        try:
+            new_message = Message(
+                chat_id=chat_id,
+                role=role,
+                content=content,
+                user_id=user_id
+            )
+            db.session.add(new_message)
+            db.session.commit()
+            db.session.refresh(new_message)
+            logger.debug(f"Saved {role} message to chat {chat_id}")
+            return new_message
+        except Exception as e:
+            db.session.rollback()
+            logger.error(f"Save message error: {str(e)}", exc_info=True)
+            return None
 
     @staticmethod
     def get_chat_history(chat_id, limit=10):
         try:
-            messages = db.session.query.filter_by(chat_id=chat_id) \
+            messages = db.session.query(Message).filter_by(chat_id=chat_id) \
                 .order_by(Message.timestamp.asc()) \
                 .limit(limit) \
                 .all()
@@ -93,30 +78,36 @@ class ChatService:
                     history.append(HumanMessage(content=msg.content))
                 elif msg.role == 'assistant':
                     history.append(AIMessage(content=msg.content))
-
-            logger.info(f"Загружена история для чата {chat_id}: {len(history)} сообщений")
             return history
-
         except Exception as e:
-            logger.error(f"Ошибка при получении истории чата {chat_id}: {e}")
+            logger.error(f"History fetch error: {e}")
             return []
 
     @staticmethod
-    def save_message(chat_id, role, content):
+    def process_ai_response(chat_id, user_id):
         try:
-            new_message = Message(
-                chat_id=chat_id,
-                role=role,
-                content=content
+            history = ChatService.get_chat_history(chat_id)
+            if not history:
+                return None
+
+            last_query = history[-1].content
+
+            vector_db = RagService.get_vector_db()
+            relevant_docs = RagService.vector_search(
+                query_text=last_query,
+                db=vector_db,
+                user_id=user_id,
+                k=4
             )
 
-            db.session.add(new_message)
-            db.session.commit()
+            answer = AIService.generate_answer(
+                query=last_query,
+                context_documents=relevant_docs,
+                chat_history=history[:-1]
+            )
 
-            logger.debug(f"Сообщение от {role} сохранено в чат {chat_id}")
-            return True
+            return ChatService.save_message(chat_id, None, 'assistant', answer)
 
         except Exception as e:
-            db.session.rollback()
-            logger.error(f"Ошибка при сохранении сообщения в SQLite: {str(e)}", exc_info=True)
-            return False
+            logger.error(f"AI Processing error: {str(e)}", exc_info=True)
+            return ChatService.save_message(chat_id, None, 'assistant', "Произошла техническая ошибка при генерации.")

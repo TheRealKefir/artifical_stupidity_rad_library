@@ -12,6 +12,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     celery.conf.update(app.config)
+    app.extensions["celery"] = celery
 
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'

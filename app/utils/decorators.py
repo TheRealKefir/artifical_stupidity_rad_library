@@ -1,32 +1,21 @@
 from functools import wraps
-from flask import request, abort
+from flask import abort
 from flask_login import current_user
+from app.extensions import db
 
 
-def check_ownership(model):
+def check_ownership(model, id_arg):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-
-            source = kwargs or request.view_args or {}
-
-            resource_id = None
-            for k, v in source.items():
-                if k.endswith("_id"):
-                    resource_id = v
-                    break
-
-            if resource_id is None:
-                abort(400, description="No id found in route")
-
-            resource = model.query.get(resource_id)
-
+            resource_id = kwargs.get(id_arg)
+            if not resource_id:
+                abort(400, description=f"Параметр {id_arg} не найден в роуте")
+            resource = db.session.get(model, resource_id)
             if resource is None:
-                abort(404)
-
+                abort(404, description="Ресурс не найден")
             if resource.user_id != current_user.id:
-                abort(403)
-
+                abort(403, description="У вас нет прав доступа к этому ресурсу")
             return func(*args, **kwargs)
 
         return wrapper
