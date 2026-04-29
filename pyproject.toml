@@ -23,4 +23,5 @@ dependencies = [
     "redis<5.0.2",
     "sentence-transformers>=5.3.0",
     "sqlalchemy>=2.0.48",
+    "python-decouple>=3.8",
 ]
