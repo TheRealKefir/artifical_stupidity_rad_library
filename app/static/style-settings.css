@@ -1,0 +1,52 @@
+.settings-box {
+  width: 600px;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 170px 1fr 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.settings-label {
+  color: #aaa;
+  font-size: 14px;
+  text-align: left;
+}
+
+.settings-content {
+  color: #ddd;
+  font-size: 18px;
+  text-align: left;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settings-content input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #777;
+  padding: 8px 0;
+  color: #fff;
+  outline: none;
+}
+
+.settings-danger {
+  background: #b22222;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #ffa07a;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.settings-danger:hover {
+  background: #cd5c5c;
+}

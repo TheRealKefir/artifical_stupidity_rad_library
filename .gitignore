@@ -11,11 +11,7 @@ venv/
 env/
 ENV/
 
-# Database
 
-db/
-*.db
-*.sqlite3
 
 # Distribution / packaging
 
@@ -37,7 +33,7 @@ var/
 
 # Logs
 
-*.log
+/logs
 
 # Unit test / coverage reports
 

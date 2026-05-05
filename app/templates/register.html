@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box">
+        <h1>Регистрация</h1>
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+            <div class="input-group">
+                <label>Имя пользователя</label>
+                {{ form.username() }}
+            </div>
+
+            <div class="input-group">
+                <label>Почта</label>
+                {{ form.email() }}
+            </div>
+
+            <div class="input-group">
+                <label>Пароль</label>
+                {{ form.password() }}
+            </div>
+
+            <div class="input-group">
+                <label>Повторите пароль</label>
+                {{ form.conf_password() }}
+            </div>
+
+            <div class="buttons">
+                <a href="{{ url_for('auth.login') }}">
+                    <button type="button" class="btn">Войти</button>
+                </a>
+                <button class="btn" type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

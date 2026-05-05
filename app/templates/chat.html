@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-layout">
+    <div class="sidebar">
+        <input class="search" placeholder="Поиск">
+        <div class="chat-list">
+            <div hx-get="/chat/list" hx-trigger="load"></div>
+
+
+        </div>
+        <div class="sidebar-buttons">
+            <button class="btn"
+                    hx-get="/upload"
+                    hx-target="body"
+                    hx-swap="beforeend">
+                Добавить книгу
+            </button>
+
+            <button class="btn"
+                    hx-post="/chat/create"
+                    hx-target="#chat-list"
+                    hx-swap="beforeend">
+                Новый чат
+            </button>
+        </div>
+
+        <div class="account">
+            <div class="avatar-small">Вы</div>
+            <a href="/settings">
+                <button class="btn">Настроить аккаунт</button>
+            </a>
+        </div>
+    </div>
+    <div class="chat-area">
+
+        <h2 class="chat-title">
+            {% if chat_id %}
+            Чат #{{ chat_id }}
+            {% else %}
+            Выберите чат или создайте новый
+            {% endif %}
+        </h2>
+
+        <div id="chat-window"
+             {% if chat_id %}
+             hx-get="{{ url_for('chat.get_messages', chat_id=chat_id) }}"
+             hx-trigger="load"
+             hx-swap="innerHTML">
+            {% endif %}>
+        </div>
+
+        {% if chat_id %}
+        <form class="input-area"
+              hx-post="/send/{{ chat_id }}"
+              hx-target="#messages"
+              hx-swap="beforeend">
+
+            <input name="text"
+                   placeholder="Поле ввода"
+                   autocomplete="off">
+
+            <button class="send" type="submit">⬆</button>
+        </form>
+        {% else %}
+        <div class="input-area">
+            <input placeholder="Сначала выберите чат" disabled>
+            <button class="send" disabled>⬆</button>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

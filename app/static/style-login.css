@@ -1,0 +1,19 @@
+.login-box {
+  background: #2a2a2a;
+  padding: 50px 60px;
+  border-radius: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.login-box h1 {
+  color: #e0e0e0;
+  margin-bottom: 40px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.login-btn {
+    color: #ccc;
+    text-decoration: none;
+}

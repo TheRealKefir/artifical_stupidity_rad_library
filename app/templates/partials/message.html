@@ -1,0 +1,15 @@
+<div class="message {{ msg.role }}">
+  <div class="message-bubble">{{ msg.content }}</div> {% if msg.role == "user" %}
+    <div class="avatar-small">Вы</div>
+  {% endif %}
+</div>
+
+{% if trigger_ai %}
+<div hx-post="{{ url_for('chat.generate_ai_answer', chat_id=msg.chat_id) }}"
+     hx-trigger="load"
+     hx-swap="outerHTML">
+     <div class="message assistant">
+         <div class="bubble">... думает ...</div>
+     </div>
+</div>
+{% endif %}

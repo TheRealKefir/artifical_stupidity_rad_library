@@ -1,0 +1,16 @@
+<div id="modal" class="modal-overlay" onclick="if(event.target == this) this.remove()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <form hx-post="/upload"
+              hx-encoding="multipart/form-data"
+              hx-target="body">
+
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.book(class="file-input") }}
+            </div>
+
+            <button type="submit" class="btn">Загрузить</button>
+        </form>
+    </div>
+</div>

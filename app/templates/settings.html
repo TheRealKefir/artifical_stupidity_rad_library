@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box settings-box">
+        <h1>Настройки</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="settings-row">
+                <div class="settings-label">Имя пользователя</div>
+                <div class="settings-content">
+                    {{ form.username() }}
+                </div>
+            </div>
+            <div class="settings-row">
+                <div class="settings-label">Почта</div>
+                <div class="settings-content">
+                    {{ form.email() }}
+                </div>
+            </div>
+            <div class="settings-row">
+                <div class="settings-label">Пароль</div>
+                <div class="settings-content">
+                    {{ form.password() }}
+                </div>
+            </div>
+            <div class="buttons">
+                {{ form.submit(class="btn") }}
+                <form action="{{ url_for('user.delete_account') }}" method="POST">
+                    <button class="settings-danger">Удалить аккаунт</button>
+                </form>
+                <a href="{{ url_for('chat.chat') }}">
+                    <button type="button" class="btn">Вернуться</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

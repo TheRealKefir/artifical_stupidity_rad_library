@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box">
+        <h1>Вход</h1>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="input-group">
+                <label>Имя пользователя</label>
+                {{ form.username() }}
+            </div>
+
+            <div class="input-group">
+                <label>Пароль</label>
+                {{ form.password() }}
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn">Войти</button>
+                <a href="{{ url_for('auth.register') }}">
+                    <button type="button" class="btn">Зарегистрироваться</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

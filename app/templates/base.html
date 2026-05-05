@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-settings.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <title>RAD-library</title>
+</head>
+<body>
+<!-- Begin page content -->
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+    {% if error %}
+    <div id="error-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Ошибка</span>
+                <button class="close-button" onclick="document.getElementById('error-modal').style.display='none'">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ error }}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm" onclick="document.getElementById('error-modal').style.display='none'">
+                    Понятно
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</main>
+</body>
+</html>
