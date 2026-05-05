@@ -8,12 +8,11 @@ from app.utils.logging import setup_logger
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    celery.conf.update(app.config)
     setup_logger(app)
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
-    celery.conf.update(app.config)
     app.extensions["celery"] = celery
-
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
@@ -31,8 +30,6 @@ def create_app(config_class=Config):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    with app.app_context():
-        db.create_all()
     app.logger.info("Приложение Flask успешно запущено")
 
     return app

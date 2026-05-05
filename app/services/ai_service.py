@@ -1,25 +1,48 @@
 import logging
 from flask import current_app
-from langchain_huggingface import HuggingFaceEndpoint
+from langchain_huggingface import HuggingFacePipeline
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 logger = logging.getLogger(__name__)
 
 
 class AIService:
+    _model_pipeline = None
+
     @staticmethod
     def _get_llm():
-        repo_id = current_app.config.get('HF_LLM_MODEL')
-        api_token = current_app.config.get('HUGGINGFACE_API_KEY')
-        return HuggingFaceEndpoint(
-            repo_id=repo_id,
-            huggingfacehub_api_token=api_token,
-            task="text-generation",
-            temperature=0.7,
-            max_new_tokens=512,
-            repetition_penalty=1.1,
-        )
+        if AIService._model_pipeline is None:
+            model_id = current_app.config.get('HF_LLM_MODEL')
+            logger.info(f"Загрузка локальной модели из HF: {model_id}")
+
+            tokenizer = AutoTokenizer.from_pretrained(
+                model_id,
+                HF_TOKEN=current_app.config.get("HF_API_TOKEN"),
+            )
+
+            model = AutoModelForCausalLM.from_pretrained(
+                model_id,
+                torch_dtype=torch.float16,
+                device_map="cpu",
+                token=current_app.config.get("HF_API_TOKEN"),
+                low_cpu_mem_usage=True
+            )
+
+            pipe = pipeline(
+                "text-generation",
+                model=model,
+                tokenizer=tokenizer,
+                max_new_tokens=512,
+                temperature=0.3,
+                repetition_penalty=1.1,
+            )
+
+            AIService._model_pipeline = HuggingFacePipeline(pipeline=pipe)
+
+        return AIService._model_pipeline
 
     @staticmethod
     def generate_answer(query, context_documents, chat_history):

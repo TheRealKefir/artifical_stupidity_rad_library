@@ -3,9 +3,10 @@ import os
 import re
 from typing import Dict, List
 
+import torch
 from flask import current_app
 from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEndpointEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 
@@ -18,14 +19,17 @@ class RagService:
     @staticmethod
     def get_embeddings():
         """
-        Получение модели эмбеддингов через Hugging Face Inference API.
-        Это не скачивает модель целиком, а отправляет текст на API HF.
+        Локальная модель эмбеддингов.
+        При первом вызове она автоматически скачается на твой сервер/компьютер.
         """
-        logger.info("Инициализация HuggingFaceEndpointEmbeddings")
-        return HuggingFaceEndpointEmbeddings(
-            model=current_app.config.get("HF_EMBEDDING_MODEL"),
-            task="feature-extraction",
-            huggingfacehub_api_token=current_app.config.get("HUGGINGFACE_API_KEY"),
+        logger.info("Инициализация локальных HuggingFaceEmbeddings")
+
+        return HuggingFaceEmbeddings(
+            model_name=current_app.config.get("HF_EMBEDDING_MODEL"),
+
+            model_kwargs={'device': 'cuda' if torch.cuda.is_available() else 'cpu'},
+
+            encode_kwargs={'normalize_embeddings': True}
         )
 
     @staticmethod

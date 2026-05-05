@@ -1,0 +1,52 @@
+services:
+  # Redis для очередей Celery
+  redis:
+    image: redis:alpine
+    restart: always
+
+  # Основное API на Gunicorn
+  web:
+    build: .
+    restart: always
+    environment:
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    ports:
+      - "22867:22867"
+    volumes:
+      - ./db:/app/db
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    depends_on:
+      - redis
+    command: gunicorn --workers 1 --timeout 120 --bind 0.0.0.0:22867 main:app
+
+  # Воркер Celery
+  celery_worker:
+    build: .
+    restart: always
+    environment:
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./db:/app/db
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    depends_on:
+      - redis
+    # Команда для запуска селери (замени 'app.celery' на путь к твоему объекту celery)
+    command: celery -A app.celery worker --loglevel=info --pool=threads

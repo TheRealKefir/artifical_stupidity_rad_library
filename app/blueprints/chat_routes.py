@@ -75,7 +75,7 @@ def upload_book():
             file_path=file_path,
             user_id=current_user.id
         )
-        return "", 200
+        return redirect('/chat')
 
     return render_template('upload_book.html', form=form), 400
 
