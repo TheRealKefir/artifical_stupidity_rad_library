@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 from app.extensions import login_manager
 from app.services import UserService
 
-root_bp = Blueprint('root_bp', __name__)
+root_bp = Blueprint('root_bp', __name__, url_prefix='aslr')
 
 
 @login_manager.user_loader

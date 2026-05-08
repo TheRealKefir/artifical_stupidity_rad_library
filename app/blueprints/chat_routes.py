@@ -10,7 +10,7 @@ from app.tasks import process_book_task
 from app.models import Chat
 from app.services import AIService, RagService
 
-chat_bp = Blueprint('chat', __name__)
+chat_bp = Blueprint('chat', __name__, url_prefix='aslr')
 
 
 @chat_bp.route("/chat")

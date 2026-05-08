@@ -4,7 +4,7 @@ from app.utils.helpers import get_password_hash
 from app.forms.account_form import AccountSettings
 from app.services.user_service import UserService
 
-user_bp = Blueprint('user', __name__)
+user_bp = Blueprint('user', __name__, url_prefix='aslr')
 
 
 @user_bp.route("/settings", methods=["GET"])
