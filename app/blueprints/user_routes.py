@@ -26,13 +26,7 @@ def settings_update():
         new_password = form.password.data
         new_email = form.email.data
 
-        if new_username and new_username != user.username:
-            UserService.update_username(current_user.id, new_username)
-        if new_email and new_email != user.email:
-            UserService.update_email(current_user.id, new_email)
-        if new_password and get_password_hash(new_password) != user.password:
-            UserService.update_password(current_user.id, new_password)
-
+    UserService.update_user(current_user.id, new_username, new_password, new_email)
     user = UserService.get_user_by_id(current_user.id)
     return render_template("settings.html", form=form, user=user)
 

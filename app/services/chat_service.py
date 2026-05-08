@@ -68,10 +68,10 @@ class ChatService:
     def get_chat_history(chat_id, limit=10):
         try:
             messages = db.session.query(Message).filter_by(chat_id=chat_id) \
-                .order_by(Message.timestamp.asc()) \
+                .order_by(Message.timestamp.desc()) \
                 .limit(limit) \
                 .all()
-
+            messages = reversed(messages)
             history = []
             for msg in messages:
                 if msg.role == 'user':
